@@ -2,6 +2,14 @@
 
 本项目的重要变更都会记录在此文件中。`1.0.2` 只创建了 GitHub Release，没有发布到 npm。
 
+## [1.0.3](https://github.com/lint-md/prettier-plugin/compare/v1.0.2...v1.0.3) (2026-07-28)
+
+
+### Bug Fixes
+
+* 完善开源文档与 npm 发布流程 ([cc4ffc1](https://github.com/lint-md/prettier-plugin/commit/cc4ffc1b60647dec2c6ee85f51f861232eac3211))
+* 完善开源文档与 npm 发布流程 ([cabbc66](https://github.com/lint-md/prettier-plugin/commit/cabbc66b67f5f447b2b32e2c02f0fb6c1fb03e1c))
+
 ## [1.0.2](https://github.com/lint-md/prettier-plugin/compare/v1.0.1...v1.0.2) (2025-03-20)
 
 ### 问题修复
