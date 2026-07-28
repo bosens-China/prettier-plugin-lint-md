@@ -1,0 +1,15 @@
+[
+  {
+    "text": "指南",
+    "link": "/guide/getting-started",
+    "activeMatch": "/guide/"
+  },
+  {
+    "text": "npm",
+    "link": "https://www.npmjs.com/package/prettier-plugin-lint-md"
+  },
+  {
+    "text": "GitHub",
+    "link": "https://github.com/lint-md/prettier-plugin"
+  }
+]

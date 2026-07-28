@@ -10,7 +10,6 @@ const config = {
   quoteProps: 'as-needed',
   bracketSpacing: true,
   arrowParens: 'always',
-  plugins: [`./dist/prettier-plugin-lint-md.js`],
 };
 
 export default config;

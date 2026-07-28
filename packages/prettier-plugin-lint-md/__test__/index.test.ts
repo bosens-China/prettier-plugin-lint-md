@@ -30,6 +30,10 @@ test(`格式化英文`, async () => {
   await expect(formatCode(code)).resolves.toBe(`${code}\n`);
 });
 
+test(`保留 lint-md 修复后的空字符串`, async () => {
+  await expect(formatCode('```\n```')).resolves.toBe('');
+});
+
 test(`验证配置`, async () => {
   const code = `测试abc`;
   await expect(
@@ -42,6 +46,41 @@ test(`验证配置`, async () => {
       ],
     }),
   ).resolves.toBe(`${code}\n`);
+});
+
+test(`读取 Prettier 插件选项`, async () => {
+  const code = `测试abc`;
+  await expect(
+    format(code, {
+      parser: PARSER_NAME,
+      plugins: [prettierPluginLintMd],
+      'space-around-alphabet': false,
+    }),
+  ).resolves.toBe(`${code}\n`);
+});
+
+test(`Prettier 插件选项覆盖工厂配置`, async () => {
+  const code = `测试abc`;
+  await expect(
+    format(code, {
+      parser: PARSER_NAME,
+      plugins: [
+        prettierLintMd({
+          'space-around-alphabet': true,
+        }),
+      ],
+      'space-around-alphabet': false,
+    }),
+  ).resolves.toBe(`${code}\n`);
+});
+
+test(`根据 Markdown 文件名推断解析器`, async () => {
+  await expect(
+    format(`测试abc`, {
+      filepath: 'README.md',
+      plugins: [prettierPluginLintMd],
+    }),
+  ).resolves.toBe(`测试 abc\n`);
 });
 
 describe('配置文件', () => {
@@ -62,11 +101,8 @@ describe('配置文件', () => {
     await expect(
       format(code, {
         parser: PARSER_NAME,
-        plugins: [
-          prettierLintMd({
-            configFile: configFile,
-          }),
-        ],
+        plugins: [prettierPluginLintMd],
+        configFile: configFile,
       }),
     ).resolves.toBe(`${code}\n`);
   });
@@ -75,12 +111,9 @@ describe('配置文件', () => {
     await expect(
       format(code, {
         parser: PARSER_NAME,
-        plugins: [
-          prettierLintMd({
-            configFile: configFile,
-            'space-around-alphabet': true,
-          }),
-        ],
+        plugins: [prettierPluginLintMd],
+        configFile: configFile,
+        'space-around-alphabet': true,
       }),
     ).resolves.toBe(`测试 abc\n`);
   });

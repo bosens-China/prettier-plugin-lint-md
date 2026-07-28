@@ -1,0 +1,69 @@
+{
+  "name": "prettier-plugin-lint-md",
+  "version": "1.0.2",
+  "description": "Prettier 插件，让 Markdown 符合中文排版规范。",
+  "contributors": [
+    "yliu <yangboses@gmail.com>"
+  ],
+  "keywords": [
+    "lint",
+    "markdown",
+    "lint-md",
+    "chinese",
+    "prettier"
+  ],
+  "author": "yliu",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://lint-md.github.io/prettier-plugin/",
+  "bugs": {
+    "url": "https://github.com/lint-md/prettier-plugin/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lint-md/prettier-plugin.git",
+    "directory": "packages/prettier-plugin-lint-md"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/prettier-plugin-lint-md.cjs",
+  "module": "./dist/prettier-plugin-lint-md.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/prettier-plugin-lint-md.js",
+      "require": "./dist/prettier-plugin-lint-md.cjs",
+      "default": "./dist/prettier-plugin-lint-md.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.20.1",
+    "prettier": "^3.9.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.5",
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.10"
+  },
+  "scripts": {
+    "build": "vite build",
+    "build-watch": "vite build -w",
+    "prepack": "pnpm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@lint-md/core": "^2.1.6"
+  },
+  "peerDependencies": {
+    "prettier": ">= 3"
+  }
+}

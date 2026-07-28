@@ -1,0 +1,23 @@
+name: 功能建议
+description: 建议新增规则或改进行为
+title: 'feat: '
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景
+      description: 请说明当前遇到的问题，而不只是描述解决方案。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议方案
+      description: 请说明期望的输入、输出和配置方式。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 其他方案
+      description: 请说明已经尝试的替代方法。

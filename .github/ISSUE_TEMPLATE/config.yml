@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 使用文档
+    url: https://lint-md.github.io/prettier-plugin/
+    about: 提交问题前，请先查阅安装、配置和规则文档。
+  - name: 安全策略
+    url: https://github.com/lint-md/prettier-plugin/security/policy
+    about: 安全漏洞请按照安全策略私下报告。

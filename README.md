@@ -1,126 +1,41 @@
 # prettier-plugin-lint-md
 
-![Static Badge](https://img.shields.io/badge/MIT-License-blue) ![Static Badge](https://img.shields.io/badge/vitest-100%25-green)
+[![npm version](https://img.shields.io/npm/v/prettier-plugin-lint-md)](https://www.npmjs.com/package/prettier-plugin-lint-md)
+[![CI](https://img.shields.io/github/actions/workflow/status/lint-md/prettier-plugin/ci.yml?branch=master&label=CI)](https://github.com/lint-md/prettier-plugin/actions/workflows/ci.yml)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE.txt)
 
-![logo](./img/logo.png)
+![prettier-plugin-lint-md](./docs/docs/public/images/logo.png)
 
-why？
+让 Prettier 格式化后的 Markdown 符合中文排版规范。
 
-[Prettier 3.0](https://prettier.io/blog/2023/07/05/3.0.0.html#stop-inserting-spaces-between-chinese-or-japanese-and-western-characters) 有许多变动，其中有一条将不会自动在中英文符号插入空格提高可读性。
+## 为什么需要这个插件？
 
-![alt text](img/image.png)
+[Prettier 3](https://prettier.io/blog/2023/07/05/3.0.0.html#stop-inserting-spaces-between-chinese-or-japanese-and-western-characters) 不再自动在中文、日文与西文字符之间插入空格。这个决定适合 Prettier 的整体用户群体。中文技术文档通常仍希望保留这类排版规则。
 
-虽然从使用群体来说 Prettier 这个决定没有什么问题，不过确实也会导致编写起来会存在很多不便，所有就有了这个插件。
+![Prettier 3 关于中西文空格的变更说明](./docs/docs/public/images/image.png)
 
-> 还有一些其他讨论：
-> [Markdown: Add an option to re-enable Prettier 2.x's automatic space insertion in CJK](https://github.com/prettier/prettier/issues/15015)
+这个插件会在 Prettier 格式化前调用 `@lint-md/core`，自动修复相关的中文排版问题。
 
-## 工作原理
+> 相关讨论：[Markdown: Add an option to re-enable Prettier 2.x's automatic space insertion in CJK](https://github.com/prettier/prettier/issues/15015)
 
-[lint-md](https://github.com/lint-md/lint-md) 是检查中文 Markdown 编写格式的工具，让你的文档更加优雅规范。
+## 快速开始
 
-它内置了许多检查：
-
-![alt text](img/image-1.png)
-
-具体配置就是[阮一峰写的中文技术文档的写作规范](https://github.com/ruanyf/document-style-guide)
-
-这个插件就是结合 Prettier 让你在编写的过程中实时修订错误。
-
-```txt
-编写 markdown  => 发现问题 => lint-md 修订 => prettier 格式化 => 输出
-```
-
-## 使用
+安装插件：
 
 ```sh
-npm i prettier-plugin-lint-md prettier -D
-# or
-yarn add prettier-plugin-lint-md prettier -D
-# pnpm
-pnpm add prettier-plugin-lint-md prettier -D
+pnpm add -D prettier prettier-plugin-lint-md
 ```
 
-在 Prettier 支持的[配置文件](https://prettier.io/docs/en/configuration)，例如 `.prettierrc.mjs`
+在 Prettier 配置中启用插件：
 
 ```js
 export default {
-  // ...
-  plugins: [`prettier-plugin-lint-md`],
+  plugins: ['prettier-plugin-lint-md'],
 };
 ```
 
-> 上面的配置是 prettier 3.0 的配置，对于低版本的 prettier 不太清楚上面配置是否有效。
-> 如果需要导入 cjs 模板的可以使用 `prettier-plugin-lint-md/dist/prettier-plugin-lint-md.cjs`。
+这就是完整的基础配置。插件默认启用全部 16 条可自动修复规则，包括中西文空格、数字空格、中文标点、省略号、空链接和代码块等常见问题。只有需要调整个别规则时，才需要添加额外配置。
 
-### Node 调用
+安装、配置、默认规则和 Node.js API 请阅读[完整文档](https://lint-md.github.io/prettier-plugin/)。
 
-```ts
-import prettierPluginLintMd, { PARSER_NAME } from 'prettier-plugin-lint-md';
-import { format } from 'prettier';
-
-const result = await format(code, {
-  parser: PARSER_NAME,
-  plugins: [prettierPluginLintMd],
-});
-```
-
-更多示例可以参考 [\_\_test\_\_](./__test__/) 目录。
-
-> 默认 import 导入的是 es 模块，但是 cjs 模块也是在构建列表中，如果想要使用，可以通过下面的形式导入。
->
-> ```js
-> const prettierPluginLintMd = require('prettier-plugin-lint-md/dist/prettier-plugin-lint-md.cjs');
-> // prettierPluginLintMd 有可能需要结合 prettierPluginLintMd.default 来使用，具体看构建工具实现。
-> // 具体参考 [rollupjs.org/configuration-options](https://rollupjs.org/configuration-options/#output-exports)
-> ```
-
-## 配置
-
-初始情况下开箱即用，如果需要对规则细致调整可以继续往下阅读。
-
-lint-md 支持 `.lintmdrc` JSON 配置文件，`prettier-plugin-lint-md` 同样也支持，默认情况下会自动启用 `.lintmdrc` 文件内的配置。
-
-如果想启用其他文件名称可以在配置文件传递 `configFile` 字段。
-
-```js
-// .prettierrc.mjs
-export default {
-  // ...
-  plugins: [`prettier-plugin-lint-md`],
-  configFile: '.lintmdrc',
-};
-```
-
-> configFile 可以是一个绝对路径也可以是相对路径，如果是相对路径会根据根目录来计算，如果绝对路径则直接启用。
-
-### 具体配置项
-
-完整配置项内容[点击查看](https://github.com/lint-md/lint-md?tab=readme-ov-file#%E8%A7%84%E5%88%99%E6%A6%82%E8%BF%B0)
-
-![alt text](img/image-1.png)
-
-之后在 `.prettierrc.mjs` 写入需要调整的配置项即可，例如禁止 `中文与英文之间需要增加空格`
-
-```js
-// .prettierrc.mjs
-export default {
-  // ...
-  plugins: [`prettier-plugin-lint-md`],
-  'space-around-alphabet': false,
-};
-```
-
-不过需要额外注意两点：
-
-**1.** 除了 `configFile` 其他都是 `boolean`，虽然规则值本身是 `0, 1, 2` 这样的字段
-![alt text](img/image-2.png)
-但是这些是 CLI 中使用的，在 prettier 中不需要警告，只需要修复所以是 `true` 和 `false` 。
-
-**2.** 不支持 `no-long-code`，因为不支持自动修复，所以没必要存在。
-
-> configFile 配置会被手动传递的规则覆盖。
-
-## 协议
-
-MIT License
+[GitHub](https://github.com/lint-md/prettier-plugin) · [问题反馈](https://github.com/lint-md/prettier-plugin/issues) · [参与贡献](./CONTRIBUTING.md) · [安全策略](./SECURITY.md) · [MIT License](./LICENSE.txt)
