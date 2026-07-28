@@ -1,2 +1,9 @@
+packages:
+  - packages/*
+  - docs
+
 allowBuilds:
   esbuild: true
+  simple-git-hooks: true
+minimumReleaseAgeExclude:
+  - brace-expansion@5.0.7 || 5.0.8

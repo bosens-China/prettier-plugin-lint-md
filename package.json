@@ -1,63 +1,37 @@
 {
-  "name": "prettier-plugin-lint-md",
-  "version": "1.0.2",
-  "description": "prettier 格式化插件，让其符合中文编写规范。",
-  "contributors": [
-    "yliu <yangboses@gmail.com>"
-  ],
-  "keywords": [
-    "lint",
-    "markdown",
-    "lint-md",
-    "chinese",
-    "prettier"
-  ],
-  "author": "yliu",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org"
-  },
-  "bugs": {
-    "url": "https://github.com/bosens-China/prettier-plugin-lint-md/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bosens-China/prettier-plugin-lint-md"
-  },
-  "license": "MIT",
+  "name": "prettier-plugin-lint-md-monorepo",
+  "private": true,
   "type": "module",
-  "main": "./dist/prettier-plugin-lint-md.js",
-  "module": "./dist/prettier-plugin-lint-md.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@11.17.0",
+  "scripts": {
+    "build": "pnpm --recursive --if-present run build",
+    "check": "pnpm lint && pnpm format:check && pnpm typecheck && pnpm test && pnpm build",
+    "docs:build": "pnpm --filter prettier-plugin-lint-md-docs build",
+    "docs:dev": "pnpm --filter prettier-plugin-lint-md-docs dev",
+    "docs:preview": "pnpm --filter prettier-plugin-lint-md-docs preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "prepare": "simple-git-hooks",
+    "test": "pnpm --filter prettier-plugin-lint-md test",
+    "typecheck": "pnpm --recursive --if-present run typecheck"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.9.3",
-    "eslint": "~10.5.0",
-    "globals": "^17.6.0",
-    "prettier": "^3.8.4",
-    "tsx": "^4.22.4",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.61.1",
-    "vite": "^8.0.16",
-    "vite-plugin-dts": "^5.0.2",
-    "vitest": "^4.1.9"
-  },
-  "scripts": {
-    "build": "vite build",
-    "build-watch": "vite build -w",
-    "test": "vitest"
-  },
-  "dependencies": {
-    "@lint-md/core": "^2.0.0"
-  },
-  "peerDependencies": {
-    "prettier": ">= 3"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
+    "eslint": "~10.8.0",
+    "globals": "^17.8.0",
+    "lint-staged": "^17.2.0",
+    "prettier": "^3.9.6",
+    "simple-git-hooks": "^2.13.1",
+    "typescript-eslint": "^8.65.0"
   }
 }

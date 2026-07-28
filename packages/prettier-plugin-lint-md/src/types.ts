@@ -94,7 +94,15 @@ export interface LintOptions {
    * @type {boolean}
    * @memberof LintOptions
    */
-  'no-fullwidth-number'?: boolean;
+  'no-full-width-number'?: boolean;
+
+  /**
+   * 中文语境下不能使用半角标点符号
+   *
+   * @type {boolean}
+   * @memberof LintOptions
+   */
+  'no-half-width-punctuation'?: boolean;
 
   /**
    * 链接前后不能有空格
@@ -130,6 +138,7 @@ export interface LintOptions {
 }
 
 declare module 'prettier' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface RequiredOptions extends LintOptions {}
 }
 

@@ -1,0 +1,50 @@
+import { PackageManagerTabs } from '@rspress/core/theme';
+
+# 快速开始
+
+## 环境要求
+
+- Node.js 22 或更高版本
+- Prettier 3
+
+## 安装
+
+<PackageManagerTabs
+  command={{
+    npm: 'npm install -D prettier prettier-plugin-lint-md',
+    yarn: 'yarn add -D prettier prettier-plugin-lint-md',
+    pnpm: 'pnpm add -D prettier prettier-plugin-lint-md',
+  }}
+/>
+
+## 配置
+
+在 Prettier 配置中显式加载插件：
+
+```js title=".prettierrc.mjs"
+export default {
+  plugins: ['prettier-plugin-lint-md'],
+};
+```
+
+以上就是完整的基础配置。无需逐条启用规则。
+
+此后按平常方式格式化 Markdown：
+
+```sh
+prettier --write "**/*.md"
+```
+
+插件会先调用 `@lint-md/core`，按照默认规则修正 Markdown 文本，再交给 Prettier 内置的 Markdown 解析器完成格式化。
+
+## 默认规则
+
+插件默认启用全部 16 条可自动修复规则。这套默认配置覆盖中西文空格、数字空格、中文标点、省略号、空链接、空列表、代码块和标题标点等常见问题。
+
+默认配置适合直接用于中文技术文档。只有需要关闭或调整个别规则时，才需要添加额外配置。所有默认规则请查看[规则](./rules)。
+
+## 下一步
+
+- 需要启用或关闭单条规则，请阅读[配置](./configuration)。
+- 需要查看所有默认规则，请阅读[规则](./rules)。
+- 需要在程序中调用，请阅读 [Node.js API](./node-api)。

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish npm Packages"
+  short_description: "Publish npm packages securely with current OIDC policy"
+  default_prompt: "Use $publish-npm-packages to configure secure npm publishing for this repository."

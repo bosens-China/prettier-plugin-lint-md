@@ -1,0 +1,43 @@
+name: 缺陷报告
+description: 报告可以稳定复现的问题
+title: 'fix: '
+body:
+  - type: markdown
+    attributes:
+      value: 请先搜索现有 Issue，并准备一个最小复现示例。
+  - type: input
+    id: versions
+    attributes:
+      label: 版本
+      description: 请填写 Node.js、Prettier 和 prettier-plugin-lint-md 版本。
+      placeholder: Node.js 22.x，Prettier 3.x，prettier-plugin-lint-md 1.x
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 最小复现
+      description: 请提供输入文本、Prettier 配置和执行命令。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已搜索现有 Issue。
+          required: true
+        - label: 这不是需要私下报告的安全漏洞。
+          required: true

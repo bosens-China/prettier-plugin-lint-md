@@ -26,7 +26,7 @@ export const NO_EMPTY_URL = {
 
 export const NO_EMPTY_LIST = {
   name: 'no-empty-list',
-  description: 'list 内容不能为空',
+  description: '列表内容不能为空',
 };
 
 export const NO_EMPTY_CODE = {
@@ -36,7 +36,7 @@ export const NO_EMPTY_CODE = {
 
 export const NO_EMPTY_INLINE_CODE = {
   name: 'no-empty-inline-code',
-  description: '行内代码块内容不能为空',
+  description: '行内代码内容不能为空',
 };
 
 export const NO_EMPTY_BLOCKQUOTE = {
@@ -51,12 +51,17 @@ export const NO_SPECIAL_CHARACTERS = {
 
 export const USE_STANDARD_ELLIPSIS = {
   name: 'use-standard-ellipsis',
-  description: '使用标准规范的省略号',
+  description: '使用标准省略号',
 };
 
-export const NO_FULLWIDTH_NUMBER = {
-  name: 'no-fullwidth-number',
+export const NO_FULL_WIDTH_NUMBER = {
+  name: 'no-full-width-number',
   description: '不能用全角数字',
+};
+
+export const NO_HALF_WIDTH_PUNCTUATION = {
+  name: 'no-half-width-punctuation',
+  description: '中文语境下不能使用半角标点符号',
 };
 
 export const NO_SPACE_IN_LINK = {

@@ -3,4 +3,6 @@ dist
 doc_build
 coverage
 .rspress
-.DS_Store
+pnpm-lock.yaml
+CHANGELOG.md
+.agents
